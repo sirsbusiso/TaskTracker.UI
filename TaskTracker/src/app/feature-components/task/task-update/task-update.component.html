@@ -1,0 +1,96 @@
+<h2 mat-dialog-title>Update Task</h2>
+
+<mat-dialog-content>
+  <form #taskForm="ngForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        name="title"
+        required
+        minlength="5"
+        [(ngModel)]="task.title"
+        #title="ngModel"
+      />
+      <mat-error *ngIf="title.invalid && title.touched">
+        Title is required and must be at least 5 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        rows="3"
+        name="description"
+        required
+        minlength="5"
+        [(ngModel)]="task.description"
+        #description="ngModel"
+      ></textarea>
+      <mat-error *ngIf="description.invalid && description.touched">
+        Description is required and must be at least 5 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select
+        name="status"
+        required
+        [(ngModel)]="task.status"
+        #status="ngModel"
+      >
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="status.invalid && status.touched">
+        Status is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Priority</mat-label>
+      <mat-select
+        name="priority"
+        required
+        [(ngModel)]="task.priority"
+        #priority="ngModel"
+      >
+        <mat-option *ngFor="let priority of priorities" [value]="priority">
+          {{ priority }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="priority.invalid && priority.touched">
+        Priority is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Due Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        name="dueDate"
+        [(ngModel)]="dueDate"
+        #dueDate="ngModel"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save(taskForm)"
+    [disabled]="taskForm.invalid"
+  >
+    Save
+  </button>
+</mat-dialog-actions>
