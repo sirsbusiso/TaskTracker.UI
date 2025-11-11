@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
         message: 'Are you sure you want to delete this item?',
         taskId: task.id,
       },
+      disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
