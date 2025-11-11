@@ -7,11 +7,10 @@
 </div>
 <div class="tasks-header">
   <mat-form-field appearance="outline" class="search-field">
-    <mat-label>Search Tasks</mat-label>
+    <mat-label>Search by title or description</mat-label>
     <input
       matInput
       [(ngModel)]="searchTerm"
-      placeholder="Search by title or description"
       (keyup.enter)="applySearch()"
       (ngModelChange)="onSearchChange($event)"
     />
