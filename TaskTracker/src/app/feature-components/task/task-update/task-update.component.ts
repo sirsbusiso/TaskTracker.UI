@@ -19,7 +19,8 @@ import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
 export class TaskUpdateComponent implements OnInit {
   priorities = Object.values(Priority);
   statuses = Object.values(Status);
-  dueDate = new Date();
+  dueDate: Date | null = null;
+
   task: TaskUpdateDto = {
     title: '',
     description: '',
@@ -37,19 +38,25 @@ export class TaskUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.data.task?.dueDate) {
+      console.log(this.data.task?.dueDate);
+      this.dueDate = this.parseDateFromString(this.data.task.dueDate);
+    }
     this.task = {
       title: this.data.task.title,
       description: this.data.task.description,
       priority: this.data.task.priority,
       status: this.data.task.status,
-      dueDate: this.data.task.dueDate,
+      dueDate: this.dueDate?.toISOString(),
     };
+    console.log(this.task);
   }
 
   save(form: NgForm) {
     this.isLoading = true;
     if (form.valid) {
-      if (this.task?.dueDate)
+      console.log(this.dueDate);
+      if (this.dueDate)
         (this.task.dueDate = this.dueDate
           ? new Date(this.dueDate)
               .toLocaleDateString('en-GB')
@@ -64,7 +71,7 @@ export class TaskUpdateComponent implements OnInit {
               }
             });
     } else {
-      form.control.markAllAsTouched(); // show all errors if user clicks save without touching
+      form.control.markAllAsTouched();
     }
   }
 
@@ -78,6 +85,6 @@ export class TaskUpdateComponent implements OnInit {
     const [day, month, year] = dueDate.split('-').map(Number);
     if (!day || !month || !year) return null;
 
-    return new Date(year, month - 1, day); // month is 0-indexed
+    return new Date(year, month - 1, day);
   }
 }

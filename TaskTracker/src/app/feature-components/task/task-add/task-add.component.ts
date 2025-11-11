@@ -19,22 +19,24 @@ export class TaskAddComponent {
 
   priorities = Object.values(Priority);
   statuses = Object.values(Status);
-  dueDate = new Date();
+
+  dueDate: Date | null = null;
   task: TaskAddDto = {
     title: '',
     description: '',
     priority: Priority.Medium,
     status: Status.New,
-    dueDate: this.dueDate
-      ? new Date(this.dueDate).toLocaleDateString('en-GB').replace(/\//g, '-')
-      : '',
+    dueDate: this.dueDate ? new Date(this.dueDate).toISOString() : '',
   };
 
   constructor(private taskService: TaskService) {}
 
   save(form: NgForm) {
+    if (this.dueDate)
+      this.task.dueDate = this.dueDate
+        ? new Date(this.dueDate).toLocaleDateString('en-GB').replace(/\//g, '-')
+        : '';
     if (form.valid) {
-      this.task.dueDate = new Date(this.task.dueDate as string).toISOString();
       this.taskService.add(this.task).subscribe((res) => {
         if (res) {
           this.dialogRef.close(this.task);
