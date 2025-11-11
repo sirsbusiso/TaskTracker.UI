@@ -40,7 +40,11 @@
     'CreatedAt',
     'DueDate'
   ]"
-  [actions]="{ edit: editTask.bind(this), delete: deleteTask.bind(this) }"
+  [actions]="{
+    view: viewTask.bind(this),
+    edit: editTask.bind(this),
+    delete: deleteTask.bind(this)
+  }"
 >
 </app-generic-table>
 

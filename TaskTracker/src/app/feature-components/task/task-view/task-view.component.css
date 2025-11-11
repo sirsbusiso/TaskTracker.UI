@@ -1,0 +1,50 @@
+.roadmap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .stage {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 4px solid lightgray;
+    &.completed {
+      border-color: green;
+      color: green;
+    }
+    &.active {
+      border-color: orange;
+      color: orange;
+    }
+    &.pending {
+      border-color: lightgray;
+      color: gray;
+    }
+  }
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .task-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+
+    h3 {
+      margin: 0 0 5px;
+    }
+
+    .status {
+      font-weight: bold;
+      color: gray;
+    }
+  }
+  .close-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+}

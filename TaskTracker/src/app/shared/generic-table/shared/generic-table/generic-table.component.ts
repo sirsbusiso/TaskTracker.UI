@@ -37,7 +37,11 @@ export class GenericTableComponent<T> implements OnInit, AfterViewInit {
   @Input() columns: string[] = [];
   @Input() data: T[] = [];
   @Input() headers: string[] = [];
-  @Input() actions?: { edit?: (row: T) => void; delete?: (row: T) => void };
+  @Input() actions?: {
+    view?: (row: T) => void;
+    edit?: (row: T) => void;
+    delete?: (row: T) => void;
+  };
   dataSource!: MatTableDataSource<T>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

@@ -12,6 +12,9 @@
   <ng-container *ngIf="actions" matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let row">
+      <button *ngIf="actions.view" mat-icon-button (click)="actions.view(row)">
+        <mat-icon>visibility</mat-icon>
+      </button>
       <button *ngIf="actions.edit" mat-icon-button (click)="actions.edit(row)">
         <mat-icon>edit</mat-icon>
       </button>

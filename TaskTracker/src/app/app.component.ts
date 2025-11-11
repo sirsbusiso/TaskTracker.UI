@@ -11,6 +11,7 @@ import { DeleteTaskComponent } from './feature-components/task/delete-task/delet
 import { TaskUpdateComponent } from './feature-components/task/task-update/task-update.component';
 import { TaskTrackerModule } from './shared/modules/task-tracker-module';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { TaskViewComponent } from './feature-components/task/task-view/task-view.component';
 
 @Component({
   selector: 'app-root',
@@ -82,6 +83,20 @@ export class AppComponent implements OnInit {
     const dialogRef = this.dialog.open(TaskAddComponent, {
       width: '1400px',
       data: {},
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getAllTasks();
+      }
+    });
+  }
+
+  viewTask(task: TaskDto) {
+    const dialogRef = this.dialog.open(TaskViewComponent, {
+      width: '1400px',
+      data: { taskId: task.id },
       disableClose: true,
     });
 

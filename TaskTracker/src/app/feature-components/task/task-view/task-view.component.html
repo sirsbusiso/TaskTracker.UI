@@ -1,0 +1,21 @@
+<div class="roadmap" *ngIf="task">
+  <div
+    *ngFor="let stage of roadmapStages"
+    class="stage"
+    [ngClass]="getStageStatus(stage)"
+  >
+    {{ stage }}
+  </div>
+</div>
+
+<div class="tasks" *ngIf="task">
+  <div class="task-card">
+    <h5>{{ task.title }}</h5>
+    <p>{{ task.description }}</p>
+    <p>Due Date: {{ task.dueDate ? task.dueDate : "Not Specified" }}</p>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="close()">Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>
