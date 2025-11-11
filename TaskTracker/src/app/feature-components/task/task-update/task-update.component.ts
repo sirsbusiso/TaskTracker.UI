@@ -39,7 +39,6 @@ export class TaskUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.task?.dueDate) {
-      console.log(this.data.task?.dueDate);
       this.dueDate = this.parseDateFromString(this.data.task.dueDate);
     }
     this.task = {
@@ -49,13 +48,11 @@ export class TaskUpdateComponent implements OnInit {
       status: this.data.task.status,
       dueDate: this.dueDate?.toISOString(),
     };
-    console.log(this.task);
   }
 
   save(form: NgForm) {
     this.isLoading = true;
     if (form.valid) {
-      console.log(this.dueDate);
       if (this.dueDate)
         (this.task.dueDate = this.dueDate
           ? new Date(this.dueDate)
