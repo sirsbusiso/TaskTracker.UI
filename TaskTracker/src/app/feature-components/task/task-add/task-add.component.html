@@ -74,6 +74,7 @@
         [matDatepicker]="picker"
         name="dueDate"
         [(ngModel)]="dueDate"
+        [min]="minDueDate"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

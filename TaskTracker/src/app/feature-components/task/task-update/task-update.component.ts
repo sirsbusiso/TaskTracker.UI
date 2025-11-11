@@ -20,7 +20,7 @@ export class TaskUpdateComponent implements OnInit {
   priorities = Object.values(Priority);
   statuses = Object.values(Status);
   dueDate: Date | null = null;
-
+  minDueDate: Date = new Date();
   task: TaskUpdateDto = {
     title: '',
     description: '',

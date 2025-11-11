@@ -19,7 +19,7 @@ export class TaskAddComponent {
 
   priorities = Object.values(Priority);
   statuses = Object.values(Status);
-
+  minDueDate: Date = new Date();
   dueDate: Date | null = null;
   task: TaskAddDto = {
     title: '',
